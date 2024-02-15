@@ -241,6 +241,7 @@ const dungeonData = {
 const frequenterSetSize = 8;
 
 function displayMessage(message, type = 'info') {
+    // Display a message on screen: info and error have special styling
     const messageTimeout = 5000; // 5 seconds
     const messageContainer = document.getElementById('messageContainer');
     const messageElement = document.createElement('div');
@@ -256,12 +257,14 @@ function displayMessage(message, type = 'info') {
 }
 
 function generateRandomPath(availablePaths) {
+    // Pick a random path from the available paths
     const randomPathIndex = Math.floor(Math.random() * availablePaths.length);
     const randomPath = availablePaths[randomPathIndex];
     return randomPath;
 }
 
 function generateNonuniqueDungeonPaths(availablePaths, n) {
+    // Generate random paths with no guarantee of uniqueness. This is not used but kept for posterity.
     const dungeonPaths = [];
     for (let i = 0; i < n; i++) {
         dungeonPaths.push(generateRandomPath(availablePaths));
@@ -270,6 +273,7 @@ function generateNonuniqueDungeonPaths(availablePaths, n) {
 }
 
 function generatePathList(dungeonData) {
+    // Create a list (FINE ARRAY) of all the dungeon paths, ammend them to include the dungeon name and waypoint code
     const pathList = [];
     for (const dungeon of dungeonData.dungeons) {
         for (const path of dungeon.paths) {
@@ -282,23 +286,27 @@ function generatePathList(dungeonData) {
 }
 
 function generateFrequenterDungeonPaths(availablePaths, n) {
+    // Create a list divided into sets of 8 unique dungeon paths
     const completeFrequenterSets = Math.floor(n / frequenterSetSize);
     const partialFrequenterSetSize = n % frequenterSetSize;
     const currentFrequenterSet = [];
     const pathList = [];
     for (let i = 0; i < completeFrequenterSets; i++) {
         for (let j = 0; j < frequenterSetSize; j++) {
+            // Pick a dungeon and remove it from the available pool
             const randomPath = generateRandomPath(availablePaths);
             currentFrequenterSet.push(randomPath);
             const index = availablePaths.indexOf(randomPath);
             availablePaths.splice(index, 1);
         }
         for (let k = 0; k < frequenterSetSize; k++) {
+            // Cycle dungeons from the previous set back into the available pool
             const currentPath = currentFrequenterSet.pop();
             pathList.push(currentPath);
             availablePaths.push(currentPath);
         }
     }
+    // Fill out the list of paths if n wasn't a multiple of 8
     for (let l = 0; l < partialFrequenterSetSize; l++) {
         const randomPath = generateRandomPath(availablePaths);
         pathList.push(randomPath);
@@ -309,6 +317,9 @@ function generateFrequenterDungeonPaths(availablePaths, n) {
 }
 
 function generateAlternateFrequenterDungeonPaths(availablePaths, n) {
+    // Generate a list of path that alternate in unique cycles of 8.
+    // No single path will appear in the last set of 8 paths.
+    // Why does anyone want this? Idk, might be fun.
     const previousEightDungeons = [];
     const pathList = [];
     for (let i = 0; i < n; i++) {
@@ -336,6 +347,7 @@ function generateDungeonPaths(n, alternateFrequenter, availablePaths) {
 }
 
 function validateNumberOfDungeons(numberOfDungeons) {
+    // You must choose more than 0 dungeons!
     if (numberOfDungeons <= 0) {
         displayMessage('Number of dungeons must be > 0.', 'error');
         return false;
@@ -345,6 +357,7 @@ function validateNumberOfDungeons(numberOfDungeons) {
 }
 
 function generateTableCell(cellData, cellClass) {
+    // Create a cell for table given a value and an optional class to be applied to the cell
     let cell = ''
     if (typeof cellClass !== 'undefined') {
         cell += `<td class="${cellClass}">`;
@@ -356,11 +369,13 @@ function generateTableCell(cellData, cellClass) {
 }
 
 function generateTableHeaderCell(cellData) {
+    // Create heading cell for the table
     const cell = `<th>${cellData.toString()}</th>`;
     return cell;
 }
 
 function generateTablePathCell(pathName, pathNumber) {
+    // Create cell for dungeon paths, combining the number and the name
     let cell = '<td>';
     if (typeof pathNumber !== 'undefined') {
         cell += pathNumber.toString();
@@ -372,6 +387,7 @@ function generateTablePathCell(pathName, pathNumber) {
 }
 
 function generatePathIDTable() {
+    // Create a table containing all dungeon information (used on Path IDs page)
     const dungeonPaths = generatePathList(dungeonData);
     const table = document.getElementById('pathIDsTable');
     let tableHTML = generateDungeonTableHeader();
@@ -387,6 +403,7 @@ function generatePathIDTable() {
 }
 
 function generateDungeonTableHeader() {
+    // Create the table header
     let tableHeader = '<thead><tr>'
     tableHeader += generateTableHeaderCell('Dungeon');
     tableHeader += generateTableHeaderCell('Path');
@@ -397,6 +414,7 @@ function generateDungeonTableHeader() {
 }
 
 function generateDungeonTableRow(dungeonPath) {
+    // Create an individual row for a given dungeonPath
     let tableRow = '<tr>'
     tableRow += generateTableCell(dungeonPath.dungeonName);
     tableRow += generateTablePathCell(dungeonPath.pathName, dungeonPath.pathNumber);
@@ -407,6 +425,7 @@ function generateDungeonTableRow(dungeonPath) {
 }
 
 function generateDungeonTable(dungeonPaths) {
+    // Create the table used on the main page to show all the dungeon paths
     const table = document.getElementById('dungeonTable');
     let tableHTML = generateDungeonTableHeader();
     tableHTML += '<tbody>';
@@ -420,11 +439,13 @@ function generateDungeonTable(dungeonPaths) {
 }
 
 function checkAlternateFrequenterEnabled() {
+    // Check!
     const checkbox = document.getElementById('alternateDungeonFrequenter');
     return checkbox.checked;
 }
 
 function generateValidPathIDList(dungeonPaths) {
+    // Create a list of all valid path IDs for given dungeonPaths
     const validPathIDs = [];
     for (const path of dungeonPaths) {
         validPathIDs.push(path.pathID);
@@ -433,6 +454,7 @@ function generateValidPathIDList(dungeonPaths) {
 }
 
 function stringListToInts(stringList) {
+    // Convert a list of strings to a list of ints
     const intList = [];
     for (const string of stringList) {
         int = parseInt(string);
@@ -442,6 +464,7 @@ function stringListToInts(stringList) {
 }
 
 function normalisePathIDList(pathIDString, validPathIDs) {
+    // Validates and cleans a list of path ID strings, ensuring they are all valid
     const validRegexPattern = "^\\s*\\d+\\s*(,\\s*\\d+\\s*)*$";
     const commaListRegex = new RegExp(validRegexPattern);
     if (commaListRegex.test(pathIDString) === false) {
@@ -461,6 +484,7 @@ function normalisePathIDList(pathIDString, validPathIDs) {
 }
 
 function cullAvailablePaths(initialPaths, cullIDList) {
+    // Remove paths with given IDs from initialPaths
     const availablePaths = []
     for (const path of initialPaths) {
         if (!(cullIDList.includes(path.pathID))) {
@@ -471,10 +495,12 @@ function cullAvailablePaths(initialPaths, cullIDList) {
 }
 
 function removeDuplicates(data) {
+    // dedup
     return [...new Set(data)];
 }
 
 function toggleRowCSS(alternateFrequenterEnabled) {
+    // Hacky way to switch row styling
     const rowStyle = document.getElementById('rowStyle');
     if (alternateFrequenterEnabled) {
         rowStyle.setAttribute('href', 'alternatingRows.css');
