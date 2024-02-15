@@ -285,27 +285,22 @@ function generateFrequenterDungeonPaths(availablePaths, n) {
     let completeFrequenterSets = Math.floor(n / frequenterSetSize);
     let partialFrequenterSetSize = n % frequenterSetSize;
     let currentFrequenterSet = [];
-    let frequenterSetIndex = 0;
     let pathList = [];
     for (let i = 0; i < completeFrequenterSets; i++) {
         for (let j = 0; j < frequenterSetSize; j++) {
             let randomPath = generateRandomPath(availablePaths);
-            var copiedPath = { ...randomPath };
-            copiedPath.frequenterSetIndex = frequenterSetIndex;
-            currentFrequenterSet.push(copiedPath);
+            currentFrequenterSet.push(randomPath);
             const index = availablePaths.indexOf(randomPath);
             availablePaths.splice(index, 1);
         }
         for (let k = 0; k < frequenterSetSize; k++) {
             currentPath = currentFrequenterSet.pop();
             pathList.push(currentPath);
-            availablePaths.push({ ...currentPath });
+            availablePaths.push(currentPath);
         }
-        frequenterSetIndex++;
     }
     for (let l = 0; l < partialFrequenterSetSize; l++) {
         let randomPath = generateRandomPath(availablePaths);
-        randomPath.frequenterSetIndex = frequenterSetIndex;
         pathList.push(randomPath);
         const index = availablePaths.indexOf(randomPath);
         availablePaths.splice(index, 1);
@@ -366,7 +361,7 @@ function generateTableHeaderCell(cellData) {
 }
 
 function generateTablePathCell(pathName, pathNumber) {
-    let cell = '<td>'
+    let cell = '<td>';
     if (typeof pathNumber !== 'undefined') {
         cell += pathNumber.toString();
         cell += ': ';
@@ -379,13 +374,15 @@ function generateTablePathCell(pathName, pathNumber) {
 function generatePathIDTable() {
     dungeonPaths = generatePathList(dungeonData);
     let table = document.getElementById('pathIDsTable');
-    table.innerHTML = generateDungeonTableHeader();
-    table.innerHTML = generateDungeonTableHeader();
+    let tableHTML = generateDungeonTableHeader();
+    tableHTML += '<tbody>';
     for (let i = 0; i < dungeonPaths.length; i++) {
         let dungeonPath = dungeonPaths[i];
         let tableRow = generateDungeonTableRow(dungeonPath);
-        table.innerHTML += tableRow;
+        tableHTML += tableRow;
     }
+    tableHTML += '</tbody>'
+    table.innerHTML = tableHTML;
     waypointCellsEasyClick();
 }
 
@@ -400,16 +397,7 @@ function generateDungeonTableHeader() {
 }
 
 function generateDungeonTableRow(dungeonPath) {
-    let tableRow = '';
-    if (typeof dungeonPath.frequenterSetIndex !== 'undefined') {
-        if (dungeonPath.frequenterSetIndex % 2 == 0) {
-            tableRow += '<tr class="tick">';
-        } else {
-            tableRow += '<tr class="tock">';
-        }
-    } else {
-        tableRow += '<tr>'
-    }
+    let tableRow = '<tr>'
     tableRow += generateTableCell(dungeonPath.dungeonName);
     tableRow += generateTablePathCell(dungeonPath.pathName, dungeonPath.pathNumber);
     tableRow += generateTableCell(dungeonPath.waypointCode, 'waypointCell');
@@ -486,6 +474,15 @@ function removeDuplicates(data) {
     return [...new Set(data)];
 }
 
+function toggleRowCSS(alternateFrequenterEnabled) {
+    let rowStyle = document.getElementById('rowStyle');
+    if (alternateFrequenterEnabled) {
+        rowStyle.setAttribute('href', 'alternatingRows.css');
+    } else {
+        rowStyle.setAttribute('href', 'alternatingBlocks.css')
+    }
+}
+
 function handleForm(event) {
     event.preventDefault();
     const numberOfDungeons = document.getElementById('numberOfDungeons').value;
@@ -494,6 +491,7 @@ function handleForm(event) {
     const allAvailablePaths = generatePathList(dungeonData);
     const validPathIDs = generateValidPathIDList(allAvailablePaths);
     let availablePaths = allAvailablePaths;
+    toggleRowCSS(alternateFrequenterEnabled);
     if (validateNumberOfDungeons(numberOfDungeons)) {
         if (numberOfDungeons >= 200) {
             alert('That\'s a lot of dungeons. Your browser may not like it.');

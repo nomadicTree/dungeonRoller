@@ -1,0 +1,10 @@
+tr:nth-child(16n + 9),
+tr:nth-child(16n + 10),
+tr:nth-child(16n + 11),
+tr:nth-child(16n + 12),
+tr:nth-child(16n + 13),
+tr:nth-child(16n + 14),
+tr:nth-child(16n + 15),
+tr:nth-child(16n + 16) {
+    background-color: #f2f2f2; /* Light Grey */
+}

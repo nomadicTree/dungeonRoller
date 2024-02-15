@@ -56,7 +56,6 @@ nav ul li a:hover {
 }
 
 /* Form styles */
-/* Form styles */
 form {
     margin-bottom: 20px;
 }
@@ -142,8 +141,4 @@ th {
 .error {
     background-color: #f8d7da;
     color: #721c24;
-}
-
-.tock {
-    background-color: #f2f2f2; /* Light grey background for tocks */
 }
