@@ -493,9 +493,6 @@ function handleForm(event) {
     let availablePaths = allAvailablePaths;
     toggleRowCSS(alternateFrequenterEnabled);
     if (validateNumberOfDungeons(numberOfDungeons)) {
-        if (numberOfDungeons >= 200) {
-            alert('That\'s a lot of dungeons. Your browser may not like it.');
-        }
         if (excludePathIDs != '') {
             nExcludePathIDs = normalisePathIDList(excludePathIDs, validPathIDs);
             availablePaths = cullAvailablePaths(availablePaths, nExcludePathIDs);
