@@ -256,13 +256,13 @@ function displayMessage(message, type = 'info') {
 }
 
 function generateRandomPath(availablePaths) {
-    let randomPathIndex = Math.floor(Math.random() * availablePaths.length);
-    let randomPath = availablePaths[randomPathIndex];
+    const randomPathIndex = Math.floor(Math.random() * availablePaths.length);
+    const randomPath = availablePaths[randomPathIndex];
     return randomPath;
 }
 
 function generateNonuniqueDungeonPaths(availablePaths, n) {
-    let dungeonPaths = [];
+    const dungeonPaths = [];
     for (let i = 0; i < n; i++) {
         dungeonPaths.push(generateRandomPath(availablePaths));
     }
@@ -270,9 +270,9 @@ function generateNonuniqueDungeonPaths(availablePaths, n) {
 }
 
 function generatePathList(dungeonData) {
-    let pathList = [];
-    for (let dungeon of dungeonData.dungeons) {
-        for (let path of dungeon.paths) {
+    const pathList = [];
+    for (const dungeon of dungeonData.dungeons) {
+        for (const path of dungeon.paths) {
             path.dungeonName = dungeon.dungeonName;
             path.waypointCode = dungeon.waypointCode;
             pathList.push(path);
@@ -282,25 +282,25 @@ function generatePathList(dungeonData) {
 }
 
 function generateFrequenterDungeonPaths(availablePaths, n) {
-    let completeFrequenterSets = Math.floor(n / frequenterSetSize);
-    let partialFrequenterSetSize = n % frequenterSetSize;
-    let currentFrequenterSet = [];
-    let pathList = [];
+    const completeFrequenterSets = Math.floor(n / frequenterSetSize);
+    const partialFrequenterSetSize = n % frequenterSetSize;
+    const currentFrequenterSet = [];
+    const pathList = [];
     for (let i = 0; i < completeFrequenterSets; i++) {
         for (let j = 0; j < frequenterSetSize; j++) {
-            let randomPath = generateRandomPath(availablePaths);
+            const randomPath = generateRandomPath(availablePaths);
             currentFrequenterSet.push(randomPath);
             const index = availablePaths.indexOf(randomPath);
             availablePaths.splice(index, 1);
         }
         for (let k = 0; k < frequenterSetSize; k++) {
-            currentPath = currentFrequenterSet.pop();
+            const currentPath = currentFrequenterSet.pop();
             pathList.push(currentPath);
             availablePaths.push(currentPath);
         }
     }
     for (let l = 0; l < partialFrequenterSetSize; l++) {
-        let randomPath = generateRandomPath(availablePaths);
+        const randomPath = generateRandomPath(availablePaths);
         pathList.push(randomPath);
         const index = availablePaths.indexOf(randomPath);
         availablePaths.splice(index, 1);
@@ -309,10 +309,10 @@ function generateFrequenterDungeonPaths(availablePaths, n) {
 }
 
 function generateAlternateFrequenterDungeonPaths(availablePaths, n) {
-    let previousEightDungeons = [];
-    let pathList = [];
+    const previousEightDungeons = [];
+    const pathList = [];
     for (let i = 0; i < n; i++) {
-        let randomPath = generateRandomPath(availablePaths);
+        const randomPath = generateRandomPath(availablePaths);
         pathList.push(randomPath);
         previousEightDungeons.push(randomPath);
         // Remove path we just added from the pool of available paths
@@ -356,7 +356,7 @@ function generateTableCell(cellData, cellClass) {
 }
 
 function generateTableHeaderCell(cellData) {
-    let cell = '<th>' + cellData.toString() + '</th>';
+    const cell = `<th>${cellData.toString()}</th>`;
     return cell;
 }
 
@@ -372,8 +372,8 @@ function generateTablePathCell(pathName, pathNumber) {
 }
 
 function generatePathIDTable() {
-    dungeonPaths = generatePathList(dungeonData);
-    let table = document.getElementById('pathIDsTable');
+    const dungeonPaths = generatePathList(dungeonData);
+    const table = document.getElementById('pathIDsTable');
     let tableHTML = generateDungeonTableHeader();
     tableHTML += '<tbody>';
     for (let i = 0; i < dungeonPaths.length; i++) {
@@ -407,7 +407,7 @@ function generateDungeonTableRow(dungeonPath) {
 }
 
 function generateDungeonTable(dungeonPaths) {
-    let table = document.getElementById('dungeonTable');
+    const table = document.getElementById('dungeonTable');
     let tableHTML = generateDungeonTableHeader();
     tableHTML += '<tbody>';
     for (let i = 0; i < dungeonPaths.length; i++) {
@@ -420,21 +420,21 @@ function generateDungeonTable(dungeonPaths) {
 }
 
 function checkAlternateFrequenterEnabled() {
-    let checkbox = document.getElementById('alternateDungeonFrequenter');
+    const checkbox = document.getElementById('alternateDungeonFrequenter');
     return checkbox.checked;
 }
 
 function generateValidPathIDList(dungeonPaths) {
-    let validPathIDs = [];
-    for (let path of dungeonPaths) {
+    const validPathIDs = [];
+    for (const path of dungeonPaths) {
         validPathIDs.push(path.pathID);
     }
     return validPathIDs;
 }
 
 function stringListToInts(stringList) {
-    let intList = [];
-    for (let string of stringList) {
+    const intList = [];
+    for (const string of stringList) {
         int = parseInt(string);
         intList.push(int);
     }
@@ -450,7 +450,7 @@ function normalisePathIDList(pathIDString, validPathIDs) {
     }
     let pathIDList = pathIDString.split(',');
     pathIDList = stringListToInts(pathIDList);
-    for (let pathID of pathIDList) {
+    for (const pathID of pathIDList) {
         if (!(validPathIDs.includes(pathID))) {
             displayMessage(`Invalid pathID: ${pathID}`, 'error');
             return false;
@@ -461,8 +461,8 @@ function normalisePathIDList(pathIDString, validPathIDs) {
 }
 
 function cullAvailablePaths(initialPaths, cullIDList) {
-    let availablePaths = []
-    for (let path of initialPaths) {
+    const availablePaths = []
+    for (const path of initialPaths) {
         if (!(cullIDList.includes(path.pathID))) {
             availablePaths.push(path);
         }
@@ -475,7 +475,7 @@ function removeDuplicates(data) {
 }
 
 function toggleRowCSS(alternateFrequenterEnabled) {
-    let rowStyle = document.getElementById('rowStyle');
+    const rowStyle = document.getElementById('rowStyle');
     if (alternateFrequenterEnabled) {
         rowStyle.setAttribute('href', 'alternatingRows.css');
     } else {
@@ -504,7 +504,7 @@ function handleForm(event) {
                 return;
             }
         }
-        let dungeonPaths = generateDungeonPaths(numberOfDungeons, alternateFrequenterEnabled, availablePaths);
+        const dungeonPaths = generateDungeonPaths(numberOfDungeons, alternateFrequenterEnabled, availablePaths);
         generateDungeonTable(dungeonPaths);
         waypointCellsEasyClick();
     }
