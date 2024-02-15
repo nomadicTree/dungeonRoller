@@ -271,8 +271,8 @@ function generateNonuniqueDungeonPaths(availablePaths, n) {
 
 function generatePathList(dungeonData) {
     let pathList = [];
-    for (dungeon of dungeonData.dungeons) {
-        for (path of dungeon.paths) {
+    for (let dungeon of dungeonData.dungeons) {
+        for (let path of dungeon.paths) {
             path.dungeonName = dungeon.dungeonName;
             path.waypointCode = dungeon.waypointCode;
             pathList.push(path);
@@ -311,7 +311,7 @@ function generateFrequenterDungeonPaths(availablePaths, n) {
 function generateAlternateFrequenterDungeonPaths(availablePaths, n) {
     let previousEightDungeons = [];
     let pathList = [];
-    for (i = 0; i < n; i++) {
+    for (let i = 0; i < n; i++) {
         let randomPath = generateRandomPath(availablePaths);
         pathList.push(randomPath);
         previousEightDungeons.push(randomPath);
@@ -426,7 +426,7 @@ function checkAlternateFrequenterEnabled() {
 
 function generateValidPathIDList(dungeonPaths) {
     let validPathIDs = [];
-    for (path of dungeonPaths) {
+    for (let path of dungeonPaths) {
         validPathIDs.push(path.pathID);
     }
     return validPathIDs;
@@ -434,7 +434,7 @@ function generateValidPathIDList(dungeonPaths) {
 
 function stringListToInts(stringList) {
     let intList = [];
-    for (string of stringList) {
+    for (let string of stringList) {
         int = parseInt(string);
         intList.push(int);
     }
@@ -450,7 +450,7 @@ function normalisePathIDList(pathIDString, validPathIDs) {
     }
     let pathIDList = pathIDString.split(',');
     pathIDList = stringListToInts(pathIDList);
-    for (pathID of pathIDList) {
+    for (let pathID of pathIDList) {
         if (!(validPathIDs.includes(pathID))) {
             displayMessage(`Invalid pathID: ${pathID}`, 'error');
             return false;
@@ -462,7 +462,7 @@ function normalisePathIDList(pathIDString, validPathIDs) {
 
 function cullAvailablePaths(initialPaths, cullIDList) {
     let availablePaths = []
-    for (path of initialPaths) {
+    for (let path of initialPaths) {
         if (!(cullIDList.includes(path.pathID))) {
             availablePaths.push(path);
         }
