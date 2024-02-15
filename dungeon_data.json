@@ -1,0 +1,209 @@
+{
+    "dungeons": [
+        {
+            "name": "Ascalonian Catacombs",
+            "waypoint_code": "[&BIYBAAA=]",
+            "paths": [
+                {
+                    "name": "Story",
+                    "recommended_level": 20
+                },
+                {
+                    "name": "Hodgins",
+                    "path_number": 1,
+                    "recommended_level": 25
+                },
+                {
+                    "name": "Detha",
+                    "path_number": 2,
+                    "recommended_level": 25
+                },
+                {
+                    "name": "Tzark",
+                    "path_number": 3,
+                    "recommended_level": 25
+                }
+            ]
+        },
+        {
+            "name": "Caudecus Manor",
+            "waypoint_code": "[&BPoAAAA=]",
+            "paths": [
+                {
+                    "name": "Story",
+                    "recommended_level": 40
+                },
+                {
+                    "name": "Asura",
+                    "path_number": 1,
+                    "recommended_level": 45
+                },
+                {
+                    "name": "Seraph",
+                    "path_number": 2,
+                    "recommended_level": 45
+                },
+                {
+                    "name": "Butler",
+                    "path_number": 3,
+                    "recommended_level": 45
+                }
+            ]
+        },
+        {
+            "name": "Twilight Arbor",
+            "waypoint_code": "[&BEEFAAA=]",
+            "paths": [
+                {
+                    "name": "Story",
+                    "recommended_level": 50
+                },
+                {
+                    "name": "Up",
+                    "path_number": 1,
+                    "recommended_level": 55
+                },
+                {
+                    "name": "Forward",
+                    "path_number": 2,
+                    "recommended_level": 55
+                },
+                {
+                    "name": "Aetherpath",
+                    "path_number": 3,
+                    "recommended_level": 80
+                }
+            ]
+        },
+        {
+            "name": "Sorrow's Embrace",
+            "waypoint_code": "[&BFYCAAA=]",
+            "paths": [
+                {
+                    "name": "Story",
+                    "recommended_level": 60
+                },
+                {
+                    "name": "Fergg",
+                    "path_number": 1,
+                    "recommended_level": 65
+                },
+                {
+                    "name": "Rasolov",
+                    "path_number": 2,
+                    "recommended_level": 65
+                },
+                {
+                    "name": "Koptev",
+                    "path_number": 3,
+                    "recommended_level": 65
+                }
+            ]
+        },
+        {
+            "name": "Citadel of Flame",
+            "waypoint_code": "[&BEAFAAA=]",
+            "paths": [
+                {
+                    "name": "Story",
+                    "recommended_level": 70
+                },
+                {
+                    "name": "Ferrah",
+                    "path_number": 1,
+                    "recommended_level": 75
+                },
+                {
+                    "name": "Magg",
+                    "path_number": 2,
+                    "recommended_level": 75
+                },
+                {
+                    "name": "Rhiannon",
+                    "path_number": 3,
+                    "recommended_level": 75
+                }
+            ]
+        },
+        {
+            "name": "Honor of the Waves",
+            "waypoint_code": "[&BEMFAAA=]",
+            "paths": [
+                {
+                    "name": "Story",
+                    "recommended_level": 76
+                },
+                {
+                    "name": "Butcher",
+                    "path_number": 1,
+                    "recommended_level": 80
+                },
+                {
+                    "name": "Plunderer",
+                    "path_number": 2,
+                    "recommended_level": 80
+                },
+                {
+                    "name": "Zealot",
+                    "path_number": 3,
+                    "recommended_level": 80
+                }
+            ]
+        },
+        {
+            "name": "Crucibal of Eternity",
+            "waypoint_code": "[&BEIFAAA=]",
+            "paths": [
+                {
+                    "name": "Story",
+                    "recommended_level": 78
+                },
+                {
+                    "name": "Submarine",
+                    "path_number": 1,
+                    "recommended_level": 80
+                },
+                {
+                    "name": "Teleporter",
+                    "path_number": 2,
+                    "recommended_level": 80
+                },
+                {
+                    "name": "Front Door",
+                    "path_number": 3,
+                    "recommended_level": 80
+                }
+            ]
+        },
+        {
+            "name": "Ruined City of Arah",
+            "waypoint_code": "[&BCADAAA=]",
+            "paths": [
+                {
+                    "name": "Story",
+                    "recommended_level": 80
+                },
+                {
+                    "name": "Jotun",
+                    "path_number": 1,
+                    "recommended_level": 80
+                },
+                {
+                    "name": "Mursaat",
+                    "path_number": 2,
+                    "recommended_level": 80
+                },
+                {
+                    "name": "Forgotten",
+                    "path_number": 3,
+                    "recommended_level": 80
+                },
+                {
+                    "name": "Seer",
+                    "path_number": 4,
+                    "recommended_level": 80
+                }
+            ]
+        }
+    ]
+}

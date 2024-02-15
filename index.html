@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dungeon Roller</title>
+</head>
+<body onload="createButtonListener()">
+    <a href="pathIDs.html">Path IDs</a>
+    <form id="dungeonForm">
+        <label>How many dungeons?<input type="number" id="numberOfDungeons" name="numberOfDungeons"></label>
+        <label>Dungeon frequenter<input type="checkbox" id="dungeonFrequenter" name="dungeonFrequenterEnabled"></label>
+        <label>Exclude pathIDs<input type="text" id="excludePathIDs" name="excludePathIDs"/></label>
+        <button id="generate">Choose my dungeons</button>
+    </form>
+    <table id="dungeonTable"></table>
+   <script type="text/javascript" src="dungeons.js"></script>
+</body>
+</html>
