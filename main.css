@@ -68,7 +68,7 @@ label {
 
 input[type="text"],
 input[type="number"] {
-    width: calc(100% - 20px);
+    width: 100%;
     padding: 8px;
     margin-top: 4px;
     margin-bottom: 12px;
@@ -86,7 +86,7 @@ input[type="checkbox"] {
 }
 
 button {
-    width: calc(100% - 20px); /* Adjust width for the button */
+    width: calc(100%); /* Adjust width for the button */
     margin-top: 10px;
     padding: 10px;
     background-color: #007bff;
@@ -106,12 +106,14 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
+    table-layout: fixed; /* Fixed layout to ensure columns have fixed width */
 }
 
 th, td {
     padding: 10px;
     border: 1px solid #ddd;
     text-align: left;
+    width: 150px; /* Adjust the width of table cells as needed */
 }
 
 th {
@@ -119,9 +121,16 @@ th {
     color: #fff;
 }
 
+.messageContainer {
+    width: 800px;
+    margin: 0 auto;
+}
+
 .message {
-    padding: 10px;
-    margin: 10px 0;
+    width: calc(100% - 30px); /* Adjust width for the button */
+    max-width: 100%;
+    padding: 10px 10px 10px 20px;
+    margin-right: 10px 0;
     border-radius: 5px;
 }
 

@@ -172,7 +172,7 @@ const dungeonData = {
             ]
         },
         {
-            dungeonName: "Crucibal of Eternity",
+            dungeonName: "Crucible of Eternity",
             waypointCode: "[&BEIFAAA=]",
             paths: [
                 {
@@ -238,6 +238,8 @@ const dungeonData = {
     ]
 }
 
+const frequenterSetSize = 8;
+
 function displayMessage(message, type = 'info') {
     const messageTimeout = 5000; // 5 seconds
     const messageContainer = document.getElementById('messageContainer');
@@ -280,7 +282,6 @@ function generatePathList(dungeonData) {
 }
 
 function generateFrequenterDungeonPaths(availablePaths, n) {
-    const frequenterSetSize = 8;
     let completeFrequenterSets = Math.floor(n / frequenterSetSize);
     let partialFrequenterSetSize = n % frequenterSetSize;
     let currentFrequenterSet = [];
@@ -341,7 +342,7 @@ function generateDungeonPaths(n, alternateFrequenter, availablePaths) {
 
 function validateNumberOfDungeons(numberOfDungeons) {
     if (numberOfDungeons <= 0) {
-        displayMessage('Number of dungeons must be >= 0', 'error');
+        displayMessage('Number of dungeons must be > 0.', 'error');
         return false;
     } else {
         return true;
@@ -456,7 +457,7 @@ function normalisePathIDList(pathIDString, validPathIDs) {
     const validRegexPattern = "^\\s*\\d+\\s*(,\\s*\\d+\\s*)*$";
     const commaListRegex = new RegExp(validRegexPattern);
     if (commaListRegex.test(pathIDString) === false) {
-        displayMessage('Invalid list of pathIDs (comma separated integers)', 'error')
+        displayMessage('Invalid list of pathIDs. Expects a comma-separated list of integers.', 'error')
         return false;
     }
     let pathIDList = pathIDString.split(',');
@@ -500,8 +501,8 @@ function handleForm(event) {
         if (excludePathIDs != '') {
             nExcludePathIDs = normalisePathIDList(excludePathIDs, validPathIDs);
             availablePaths = cullAvailablePaths(availablePaths, nExcludePathIDs);
-            if (alternateFrequenterEnabled && availablePaths.length < 8) {
-                alert('You\'ve excluded too many dungeons!');
+            if (availablePaths.length < frequenterSetSize && availablePaths.length < numberOfDungeons) {
+                displayMessage('You\'ve excluded too many dungeons! Cannot find enough unique paths.', 'error');
                 return;
             }
         }

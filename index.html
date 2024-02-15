@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dungeon Roller</title>
     <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
 </head>
 
 <body onload="createButtonListener()">
@@ -22,10 +24,14 @@
             <label>How many dungeons?<input type="number" id="numberOfDungeons" name="numberOfDungeons"></label>
             <label>Exclude pathIDs<input type="text" id="excludePathIDs" name="excludePathIDs"
                     placeholder="e.g. 14, 28" /></label>
-            <label>
-                Alternate dungeon frequenter<input type="checkbox" id="alternateDungeonFrequenter"
-                    name="alternateDungeonFrequenterEnabled"
-                    title="Generate continuous sets of 8 unique paths rather than blocks."></label>
+            <span class="tooltip"
+                title="This mode enables continuous cycles of eight unique dungeons rather than discrete blocks of eight. This means that in any given set of 8 sequential dungeons, all will be unique. Normally, the 'uniqueness' resets on the eighth dungeon which matches the in-game Dungeon Frequenter achievement.">
+                <label>
+                    <i class="fa fa-info-circle" aria-hidden="true"></i>
+                    Alternate dungeon frequenter<input type="checkbox" id="alternateDungeonFrequenter"
+                        name="alternateDungeonFrequenterEnabled"></label></span>
+
+
             <button id="generate">Choose my dungeons</button>
         </form>
         <div id="messageContainer"></div>
