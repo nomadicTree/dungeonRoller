@@ -468,14 +468,14 @@ function normalisePathIDList(pathIDString, validPathIDs) {
     const validRegexPattern = "^\\s*\\d+\\s*(,\\s*\\d+\\s*)*$";
     const commaListRegex = new RegExp(validRegexPattern);
     if (commaListRegex.test(pathIDString) === false) {
-        displayMessage('Invalid list of pathIDs. Expects a comma-separated list of integers.', 'error')
+        displayMessage('Invalid list of pathIDs. Expects a comma-separated list of positive integers.', 'error')
         return false;
     }
     let pathIDList = pathIDString.split(',');
     pathIDList = stringListToInts(pathIDList);
     for (const pathID of pathIDList) {
         if (!(validPathIDs.includes(pathID))) {
-            displayMessage(`Invalid pathID: ${pathID}`, 'error');
+            displayMessage(`Invalid pathID: ${pathID}.`, 'error');
             return false;
         }
     }
