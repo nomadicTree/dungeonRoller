@@ -299,6 +299,7 @@ function generateFrequenterDungeonPaths(availablePaths, n) {
             const index = availablePaths.indexOf(randomPath);
             availablePaths.splice(index, 1);
         }
+        currentFrequenterSet.sort((a, b) => b.pathID - a.pathID);
         for (let k = 0; k < frequenterSetSize; k++) {
             // Cycle dungeons from the previous set back into the available pool
             const currentPath = currentFrequenterSet.pop();
